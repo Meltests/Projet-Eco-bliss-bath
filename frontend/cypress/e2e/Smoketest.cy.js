@@ -1,4 +1,4 @@
-describe('contact page', () => {
+describe('smoke test', () => {
    
     //Partie 1 du Smoke test : Vérifier la présence des champs et boutons de connexion//
     beforeEach(() => {
