@@ -3,6 +3,8 @@ describe('contact page', () => {
     beforeEach(() => {
     cy.visit('http://localhost:4200');
   });
+
+  // TEST FONCTIONNEL : CONNEXION //
     
     it('consulter la page de connexion', () => {
         cy.getBySel('nav-link-login').click();
@@ -30,6 +32,10 @@ describe('contact page', () => {
         cy.getBySel('login-submit').click();
         cy.getBySel('nav-link-cart').should('not.exist');
     })
+
+    // TEST FONCTIONNEL : PANIER //
+
+    
 } 
 )
 

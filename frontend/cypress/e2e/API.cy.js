@@ -23,25 +23,26 @@ describe('Test API GET / POST ', () => {
 
  
             cy.request('POST', 'http://localhost:8081/login', {
-            username: "test2@test.fr",
-            password: "testtest"
-             }).then((response) => {
+                username: "test2@test.fr",
+                password: "testtest"
+            }).then((response) => {
                 expect(response.status).to.eq(200);
                 expect(response.body).to.have.property('token');
-            token = response.body.token; 
-            window.localStorage.setItem('user', token); //je récupére les valeurs du token sur le site//
-         });
+                token = response.body.token; 
+                window.localStorage.setItem('user', token);
+            });
         });
 
-        //
+
 
         it('Requête elements du panier quand on est connecté', () => {
             cy.request({
-            method: 'GET',
-            url: 'http://localhost:8081/orders',
-            headers: { Authorization: `Bearer ${token}` }
-        }).then((response) => {
+                method: 'GET',
+                url: 'http://localhost:8081/orders',
+                headers: { Authorization: `Bearer ${token}` }
+            }).then((response) => {
             expect(response.status).to.eq(200);
+            expect(response.body).to.have.property("id", product.id).that.is.a('number');
          });
         });
 
@@ -49,13 +50,96 @@ describe('Test API GET / POST ', () => {
    
         it('Requête un element spécifique de la liste des produits', () => {
             cy.request({
-            method: 'GET',
-            url: 'http://localhost:8081/products/4', 
+                method: 'GET',
+                url: 'http://localhost:8081/products/4', 
         }).then((response) => {
             expect(response.status).to.eq(200);
             expect(response.body).to.have.property('id', 4)
             })
         })
-        
+
+
+
+
+    // PARTIE 2 : METHODE POST // 
+    it('Se connecte avec utilisateur inconnu', () => {
+        cy.request({
+            method: "POST", 
+            url: "http://localhost:8081/login", 
+            body : {
+                username:'erreur@gmail.com', 
+                password: 'erreur00',
+            },
+            failOnStatusCode: false,
+        }).then((response => {
+            expect(response.status).to.eq(401);
+        }))
+    })
+
+    
+
+    it('Se connecte avec utilisateur connu', () => {
+        cy.request({
+            method: "POST", 
+            url: "http://localhost:8081/login", 
+            body : {
+            username:'test2@test.fr', 
+            password: 'testtest',
+            },
+        }).then((response => {
+            expect(response.status).to.eq(200);
+        })) 
+    })
+
+
+
+    it('Ajouter produit en stock dans panier', () => {
+        cy.request({
+            method: 'POST',
+            url: 'http://localhost:8081/orders/add', 
+            headers: { Authorization: `Bearer ${token}` },
+            body: {
+                productId: 9, 
+                qualtity : 1,
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+        })
+    })
+
+
+    it('Ajouter produit en rupture', () => {
+        cy.request({
+            method: 'POST',
+            url: 'http://localhost:8081/orders/add', 
+            headers: { Authorization: `Bearer ${token}` },
+            body: {
+                productId: 7, 
+                qualtity : 1,
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(['404', '400']);
+        })
+    })
+    
+    
+    
+    it('ajouter un avis', () => {
+        cy.request({
+            method: 'POST',
+            url: 'http://localhost:8081/reviews', 
+            headers: { Authorization: `Bearer ${token}` },
+            body: {
+                title: 'bravo',
+                comment: 'beau travail',
+                rating: 5,
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body).to.have.property('title', 'bravo'); 
+            expect(response.body).to.have.property('comment', "beau travail");
+        })
+    })
 } 
 )
+

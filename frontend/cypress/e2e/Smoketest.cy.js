@@ -16,6 +16,8 @@ describe('smoke test', () => {
         cy.getBySel('login-submit').should('be.visible');
     })
 
+
+
     //Partie 2 du Smoke test : Vérifier la présence des boutons d’ajout au panier quand vous êtes connecté///
 
   it('Présence du bouton panier après connexion',() => {
