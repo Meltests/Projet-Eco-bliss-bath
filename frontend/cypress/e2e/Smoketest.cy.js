@@ -9,8 +9,7 @@ describe('smoke test', () => {
         cy.getBySel('nav-link-login').click();
     })
 
-    it('Vérifier existance des champs',() => {
-        cy.visit('/#/login');
+    it('Vérifier existance des champs',() => { 
         cy.getBySel('login-input-username').should('be.visible');
         cy.getBySel('login-input-password').should('be.visible');
         cy.getBySel('login-submit').should('be.visible');
@@ -18,10 +17,9 @@ describe('smoke test', () => {
 
 
 
-    //Partie 2 du Smoke test : Vérifier la présence des boutons d’ajout au panier quand vous êtes connecté///
+    //Partie 2 du Smoke test : Vérifier la présence du bouton d’ajout au panier après connexion //
 
   it('Présence du bouton panier après connexion',() => {
-        cy.visit('/#/login');
         cy.getBySel('login-input-username').should('be.visible').type('test2@test.fr');
         cy.getBySel('login-input-password').should('be.visible').type('testtest');
         cy.getBySel('login-submit').click();

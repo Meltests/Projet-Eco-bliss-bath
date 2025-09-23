@@ -17,7 +17,7 @@ describe('Test API GET / POST ', () => {
 
     
     //GET retourner la liste des produits qui sont dans panier en étant connecté// 
-        let token = null 
+        let token = null
      
        it('Récupération du token pour récupérer les elements du panier', () => {
 
@@ -42,7 +42,18 @@ describe('Test API GET / POST ', () => {
                 headers: { Authorization: `Bearer ${token}` }
             }).then((response) => {
             expect(response.status).to.eq(200);
-            expect(response.body).to.have.property("id", product.id).that.is.a('number');
+
+            expect(response.body).to.have.property('orderLines');
+            expect(response.body.orderLines).to.be.an('array');   
+            
+            response.body.orderLines.forEach(line => {
+            expect(line).to.have.property('product');
+            expect(line.product).to.have.property('id').that.is.a('number');
+            expect(line.product).to.have.property('name').that.is.a('string');
+            expect(line.product).to.have.property('price').that.is.a('number');
+            expect(line).to.have.property('quantity').that.is.a('number');
+            }); 
+         
          });
         });
 
@@ -56,7 +67,7 @@ describe('Test API GET / POST ', () => {
             expect(response.status).to.eq(200);
             expect(response.body).to.have.property('id', 4)
             })
-        })
+        }) 
 
 
 
@@ -78,7 +89,7 @@ describe('Test API GET / POST ', () => {
 
     
 
-    it('Se connecte avec utilisateur connu', () => {
+    it.only('Se connecte avec utilisateur connu', () => {
         cy.request({
             method: "POST", 
             url: "http://localhost:8081/login", 
@@ -93,7 +104,7 @@ describe('Test API GET / POST ', () => {
 
 
 
-    it('Ajouter produit en stock dans panier', () => {
+    it.only('Ajouter produit en stock dans panier', () => {
         cy.request({
             method: 'POST',
             url: 'http://localhost:8081/orders/add', 
@@ -138,6 +149,7 @@ describe('Test API GET / POST ', () => {
             expect(response.status).to.eq(200);
             expect(response.body).to.have.property('title', 'bravo'); 
             expect(response.body).to.have.property('comment', "beau travail");
+            expect(response.body).to.have.property('rating', 5);
         })
     })
 } 
