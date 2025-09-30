@@ -3,7 +3,9 @@ import { defineConfig } from "cypress";
 export default defineConfig({
 
    env: {
-    apiUrl: "http://localhost:8081"   // pour les requêtes API//
+    apiUrl: "http://localhost:8081",   // pour les requêtes API//
+    userEmail: "test2@test.fr",
+    userPassword: "testtest",
   },
 
   e2e: {

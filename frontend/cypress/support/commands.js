@@ -39,3 +39,12 @@
 Cypress.Commands.add('getBySel', (selector, ...args) => {
   return cy.get(`[data-cy=${selector}]`, ...args);
 });
+
+Cypress.Commands.add("connexionCompte", () => {
+  cy.intercept("POST", "**/login").as("connexion");
+  cy.visit("/#/login");
+  cy.getBySel("login-input-username").type(Cypress.env("userEmail"));
+  cy.getBySel("login-input-password").type(Cypress.env("userPassword"));
+  cy.getBySel("login-submit").click();
+  cy.wait("@connexion");
+});
