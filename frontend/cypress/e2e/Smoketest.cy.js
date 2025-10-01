@@ -25,5 +25,25 @@ describe('smoke test', () => {
         cy.getBySel('login-submit').click();
         cy.getBySel('nav-link-cart').should('be.visible');
     })
+
+
+      // FAILLE XSS //
+
+    it('faille XSS dans les avis', () => {
+        
+        cy.connexionCompte();
+
+        cy.url().should('not.include', '/login');
+      
+        cy.getBySel("nav-link-reviews").click();
+
+       cy.getBySel("review-input-title").type('<script>alert("XSS");</script>');
+       cy.getBySel("review-input-comment").type('Merci beaucoup');
+       cy.getBySel("review-submit").click();
+
+       cy.on('window:alert', () => {
+    throw new Error('Une fenêtre d\'alerte s\'est affichée !');
+     });
+    });
 } 
 )

@@ -1,6 +1,6 @@
 <div align="center">
 
-# OpenClassrooms - Eco-Bliss-Bath
+# OpenClassrooms - Eco-Bliss-Bath - Test automatisé Cypress
 </div>
 
 <p align="center">
@@ -11,30 +11,63 @@
   <br><br><br>
 </p>
 
-# Prérequis
+### Description du projet ###
+
+Eco Bliss Bath est une start-up de e-commerce spécialisée dans les produits 
+de beauté éco-responsables, avec comme produit principal à la vente; le savon solide.  
+Ce projet a pour but d'automatiser les tests du site qui se divisent en 3 catégories : 
+- Tests d'API (Back-end)
+- Smoke Tests
+- Tests fonctionnels (front-end) 
+
+
+### Prérequis ### 
 Pour démarrer cet applicatif web vous devez avoir les outils suivants:
 - Docker
 - NodeJs
+- npm
 
-# Installation et démarrage
+
+### Installation et démarrage ### 
 Clonez le projet pour le récupérer
-``` 
-git clone https://github.com/OpenClassrooms-Student-Center/Eco-Bliss-Bath-V2.git
+
+1. se rendre sur le terminal 
+2. faire cette commande : git clone https://github.com/OpenClassrooms-Student-Center/Eco-Bliss-Bath-V2.git
 cd Eco-Bliss-Bath-V2
-```
-Pour démarrer l'API avec ça base de données.
-```
-docker compose up -d
-```
-# Pour démarrer le frontend de l'applicatif
-Rendez-vous dans le dossier frontend
-```
-cd ./frontend
-```
-Installez les dépendances du projet
-```
-npm i
-ou
-npm install (si vous préférez)
-```
+
+# Pour démarrer l'API #
+1. docker compose up -d
+2. docker compose down pour l'arrêter
+
+# Pour démarrer le frontend #
+1. Ouvrir le terminal
+2. Acceder au dossier contenant le front-end du produit : cd ./frontend
+3. Installez les dépendances du projet : 
+
+-npm i ou npm install (si vous préférez)
+- npm start (pour le lancer)
+
+
+# Installation et démarrage de Cypress #
+
+1. Se rendre sur le chemin du front-end dans le terminal 
+2. lancer la commande : npm install cypress --save-dev (pour l'installer)
+3. npx cypress open (pour démarrer avec l'interface)
+4. npx cypress run (pour lancer les tests en mode headless). 
+
+
+
+### Usage ### 
+
+Les tests suivant sont exécutés via ces fichiers : 
+
+- Api.cy.js
+- Smoketest.cy.js
+- testsfonctionnels.cy.js
+
+### Support ### 
+
+Le projet a été réalisé dans le cadre de la formation OpenClassrooms. 
+
+
 

@@ -111,7 +111,7 @@ describe('tests fonctionnels', () => {
 
     // Ajout produit au panier et vérification appel API//
 
-    it.only('ajoute un produit au panier et vérifier via API', () => {
+    it('ajoute un produit au panier et vérifier via API', () => {
     
       const productName = 'Poussière de lune';
       cy.intercept('GET', '**/orders').as('getOrders');
@@ -123,6 +123,7 @@ describe('tests fonctionnels', () => {
           cy.getBySel('product-link').click();
         });
 
+      cy.getBySel('detail-product-quantity').clear().type(1);
       cy.getBySel('detail-product-add').should('be.enabled').click();
      
     
@@ -130,7 +131,7 @@ describe('tests fonctionnels', () => {
       cy.getBySel('cart-line-name').should('contain', productName);
 
       // Vérification L'appel API//
-    cy.wait('@getOrders').its('response').should((response) => {
+      cy.wait('@getOrders').its('response').should((response) => {
       expect(response.statusCode).to.eq(200);
 
       const lines = response.body.orderLines || [];
@@ -143,25 +144,6 @@ describe('tests fonctionnels', () => {
     });
     });
 
- 
-    // TEST FONCTIONNEL : FAILLE XSS //
-
-    it('faille XSS dans les avis', () => {
-        
-        cy.connexionCompte();
-
-        cy.url().should('not.include', '/login');
-      
-        cy.getBySel("nav-link-reviews").click();
-
-       cy.getBySel("review-input-title").type('<script>alert("XSS");</script>');
-       cy.getBySel("review-input-comment").type('Merci beaucoup');
-       cy.getBySel("review-submit").click();
-
-       cy.on('window:alert', () => {
-    throw new Error('Une fenêtre d\'alerte s\'est affichée !');
-     });
-    });
 
 } 
 )
