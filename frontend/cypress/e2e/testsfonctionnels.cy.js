@@ -5,27 +5,16 @@ describe('tests fonctionnels', () => {
   });
 
   // TEST FONCTIONNEL : CONNEXION //
-    
-    it('consulter la page de connexion', () => {
+
+    it('Consulter la page de connexion et se connecter',() => {
         cy.getBySel('nav-link-login').click();
-    })
-
-    it('Vérifier existance des champs',() => {
-        cy.visit('/#/login');
-        cy.getBySel('login-input-username').should('be.visible');
-        cy.getBySel('login-input-password').should('be.visible');
-        cy.getBySel('login-submit').should('be.visible');
-    })
-
-    it('Valider les données dans les champs et se connecter',() => {
-        cy.visit('/#/login');
         cy.getBySel('login-input-username').should('be.visible').type('test2@test.fr');
         cy.getBySel('login-input-password').should('be.visible').type('testtest');
         cy.getBySel('login-submit').click();
         cy.getBySel('nav-link-cart').should('be.visible');
     })
 
-     it('Empecher la connexion mauvais identifiants',() => {
+     it('Empecher la connexion avec de mauvais identifiants',() => {
         cy.visit('/#/login');
         cy.getBySel('login-input-username').should('be.visible').type('erreur@test.fr');
         cy.getBySel('login-input-password').should('be.visible').type('erreur00');
@@ -111,7 +100,7 @@ describe('tests fonctionnels', () => {
 
     // Ajout produit au panier et vérification appel API//
 
-    it('ajoute un produit au panier et vérifier via API', () => {
+    it('ajouter un produit au panier et vérifier via API', () => {
     
       const productName = 'Poussière de lune';
       cy.intercept('GET', '**/orders').as('getOrders');

@@ -2,13 +2,11 @@ describe('Test API GET / POST ', () => {
 
     const apiOrders = `${Cypress.env("apiUrl")}/orders`;
     const apiLogin = `${Cypress.env("apiUrl")}/login`;
-    const apiProducts = `${Cypress.env("apiUrl")}/products`;
     const apiReviews =  `${Cypress.env("apiUrl")}/reviews`;
     const apiOrdersAdd = `${apiOrders}/add`;
 
 
-      //GET orders sans être connecté// 
-    describe('Tester API Methode GET', () => {
+    describe('Tester API Methode GET, POST, PUT', () => {
         it('Impossible de récupérer les orders sans être authentifié', () => {
          cy.request({
             method: "GET", 
@@ -78,7 +76,7 @@ describe('Test API GET / POST ', () => {
 
 
         // PARTIE 2 : METHODE POST // 
-        it('Se connecte avec utilisateur inconnu', () => {
+        it('Se connecter avec utilisateur inconnu', () => {
             cy.request({
                 method: "POST", 
                 url: apiLogin, 
@@ -94,7 +92,7 @@ describe('Test API GET / POST ', () => {
 
         
 
-        it('Se connecte avec utilisateur connu', () => {
+        it('Se connecter avec utilisateur connu', () => {
             cy.request({
                 method: "POST", 
                 url: apiLogin, 
@@ -124,7 +122,7 @@ describe('Test API GET / POST ', () => {
         })
 
 
-        it('Ajouter produit en rupture', () => {
+        it('Ajouter produit en rupture de stock dans le panier', () => {
             cy.request({
                 method: 'POST',
                 url: apiOrdersAdd, 
@@ -158,7 +156,7 @@ describe('Test API GET / POST ', () => {
 
 
 
-       it('Ajouter produit en rupture avec méthode PUT', () => {
+       it('Ajouter produit en rupture de stock avec méthode PUT', () => {
             cy.request({
                 method: 'PUT', 
                 url: apiOrdersAdd,

@@ -13,57 +13,58 @@
 
 ### Description du projet ###
 
-Eco Bliss Bath est une start-up de e-commerce spécialisée dans les produits 
-de beauté éco-responsables, avec comme produit principal à la vente; le savon solide.  
-Ce projet a pour but d'automatiser les tests du site qui se divisent en 3 catégories : 
+Eco Bliss Bath est une start-up e-commerce spécialisée dans les produits 
+de beauté éco-responsables, avec comme produit principal; le savon solide.  
+Ce projet a pour but d'automatiser les tests suivants : 
 - Tests d'API (Back-end)
 - Smoke Tests
 - Tests fonctionnels (front-end) 
 
 
 ### Prérequis ### 
-Pour démarrer cet applicatif web vous devez avoir les outils suivants:
+Pour démarrer ce site, il faut les outils suivants:
 - Docker
 - NodeJs
-- npm
 
 
 ### Installation et démarrage ### 
 Clonez le projet pour le récupérer
 
-1. se rendre sur le terminal 
-2. faire cette commande : git clone https://github.com/OpenClassrooms-Student-Center/Eco-Bliss-Bath-V2.git
+1. Se rendre sur le terminal 
+2. Faire cette commande : git clone https://github.com/OpenClassrooms-Student-Center/Eco-Bliss-Bath-V2.git
 cd Eco-Bliss-Bath-V2
 
 # Pour démarrer l'API #
 1. docker compose up -d
-2. docker compose down pour l'arrêter
+2. docker compose down (pour l'arrêter)
 
 # Pour démarrer le frontend #
 1. Ouvrir le terminal
-2. Acceder au dossier contenant le front-end du produit : cd ./frontend
-3. Installez les dépendances du projet : 
+2. Acceder au dossier contenant le front-end du site: cd ./frontend
+3. Installer les dépendances du projet : 
 
 -npm i ou npm install (si vous préférez)
 - npm start (pour le lancer)
+- CTRL + C (pour arrêter)
 
 
 # Installation et démarrage de Cypress #
 
 1. Se rendre sur le chemin du front-end dans le terminal 
 2. lancer la commande : npm install cypress --save-dev (pour l'installer)
-3. npx cypress open (pour démarrer avec l'interface)
+3. npx cypress open (pour démarrer avec l'interface cypress)
 4. npx cypress run (pour lancer les tests en mode headless). 
+5. Configurer le E2e testing pour exécuter les tests.
 
 
 
 ### Usage ### 
 
-Les tests suivant sont exécutés via ces fichiers : 
+Les tests sont exécutés via ces fichiers : 
 
-- Api.cy.js
-- Smoketest.cy.js
-- testsfonctionnels.cy.js
+- Api.cy.js : Tests des différents End-points
+- Smoketest.cy.js : Tests de vérification de champs. 
+- testsfonctionnels.cy.js : Test connexion et panier
 
 ### Support ### 
 
